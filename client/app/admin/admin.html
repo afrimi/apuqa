@@ -1,0 +1,25 @@
+<div class="container">
+    <br/>
+    <div style="text-align: center">
+        <!-- <a type="button" class="btn btn-primary" ng-click="admin.openRegister()">Create User</a> -->
+        <button type="button" class="btn btn-primary"
+        ng-dialog="app/admin/admin.createUser.html"
+        ng-dialog-controller="AdminController"
+        ng-dialog-data="{{jsonData}}"
+        ng-dialog-class="ngdialog-theme-default"
+        ng-dialog-scope="this"
+        ng-dialog-show-close="false">Create User</button>
+    </div>
+    <ul class="list-group user-list">
+        <li class="list-group-item" ng-repeat="user in admin.users">
+            <div class="user-info">
+                <a ng-href="/users/{{user._id}}">{{user.name}}</a>
+                <br>
+                <span class="text-muted">{{user.email}}</span>
+            </div>
+            <a class="pencil" ng-click="admin.openEdit(user)"><span class="fa fa-pencil-square-o fa-2x"></span></a>&nbsp;&nbsp;
+            <a ng-really-message="Are you sure?" ng-really-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+        </li>
+    </ul>
+</div>
+

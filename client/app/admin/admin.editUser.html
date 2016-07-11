@@ -1,0 +1,32 @@
+<div class="ngdialog-message">
+    <div class="">
+        <h3>Edit User</h3>
+    </div>
+    <div class="">&nbsp;</div>
+    <div class="">
+        <form class="form" name="form" ng-submit="admin.editUser(ngDialogData)" novalidate>
+            <div class="form-group">
+                <label class="sr-only" for="name">Name</label>
+                <input type="text" name="name" class="form-control input-sm" placeholder="Name" ng-model="ngDialogData.name" ng-disabled="true">
+                
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="email">Email</label>
+                <input type="email" class="form-control input-sm" name="email" placeholder="Email" ng-model="ngDialogData.email" ng-disabled="true">
+                
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="assignRole">Assign Role</label>
+                <select class="form-control input-sm" ng-model="ngDialogData.role" name="assignRole" required>
+                    <option value="user">user</option>
+                    <option value="lecturer">lecturer</option>
+                </select>
+                <p class="help-block" ng-show="form.assignRole.$error.required">
+                    Assign user role.
+                </p>
+            </div>
+            <button type="submit" class="btn btn-info btn-sm">Save</button>
+            <button type="button" class="btn btn-default btn-sm" ng-click=closeThisDialog("")>Cancel</button>
+        </form>
+    </div>
+</div>

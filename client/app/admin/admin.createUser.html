@@ -1,0 +1,64 @@
+<div class="ngdialog-message">
+    <div class="">
+        <h3>Create New User </h3>
+    </div>
+    <div class="">&nbsp;</div>
+    <div class="">
+        <form class="form" name="form" ng-submit="admin.create(form)" novalidate>
+            <div class="form-group" ng-class="{ 'has-success': form.name.$valid && admin.submitted,
+                                            'has-error': form.name.$invalid && admin.submitted }">
+                <label class="sr-only" for="name">Name</label>
+                <input type="text" name="name" class="form-control input-sm" placeholder="Name" ng-model="admin.user.name" required/>
+                <p class="help-block" ng-show="form.name.$error.required && admin.submitted">
+                    A name is required
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-success': form.email.$valid && admin.submitted,
+                                            'has-error': form.email.$invalid && admin.submitted }">
+                <label class="sr-only" for="email">Email</label>
+                <input type="email" class="form-control input-sm" name="email" placeholder="Email" ng-model="admin.user.email" required mongoose-error/>
+                <p class="help-block" ng-show="form.email.$error.email && admin.submitted">
+                    Doesn't look like a valid email.
+                </p>
+                <p class="help-block" ng-show="form.email.$error.required && admin.submitted">
+                    What's your email address?
+                </p>
+                <p class="help-block" ng-show="form.email.$error.mongoose">
+                    {{ admin.errors.email }}
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-success': form.password.$valid && admin.submitted,
+                                            'has-error': form.password.$invalid && admin.submitted }">
+                <label class="sr-only" for="password">Password</label>
+                <input type="password" class="form-control input-sm" name="password" placeholder="Password" ng-model="admin.user.password" ng-minlength="3" required mongoose-error/>
+                <p class="help-block" ng-show="(form.password.$error.minlength || form.password.$error.required) && admin.submitted">
+                    Password must be at least 3 characters.
+                </p>
+                <p class="help-block" ng-show="form.password.$error.mongoose">
+                    {{ admin.errors.password }}
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && admin.submitted,
+                                            'has-error': form.confirmPassword.$invalid && admin.submitted }">
+                <label class="sr-only" for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control input-sm" name="confirmPassword" placeholder="Confirm Password" ng-model="admin.user.confirmPassword" match="admin.user.password" ng-minlength="3" required/>
+                <p class="help-block" ng-show="form.confirmPassword.$error.match && admin.submitted">
+                    Passwords must match.
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-success': form.assignRole.$valid && admin.submitted,
+                                            'has-error': form.assignRole.$invalid && admin.submitted }">
+                <label class="sr-only" for="assignRole">Assign Role</label>
+                <select class="form-control input-sm" ng-model="admin.user.role" name="assignRole" required>
+                    <option value="user">user</option>
+                    <option value="lecturer">lecturer</option>
+                </select>
+                <p class="help-block" ng-show="form.assignRole.$error.required && admin.submitted">
+                    Assign user role.
+                </p>
+            </div>
+            <button type="submit" class="btn btn-info btn-sm">Register</button>
+            <button type="button" class="btn btn-default btn-sm" ng-click=closeThisDialog("Cancel")>Cancel</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>apuQA</h1>
+    <p class="lead">Knowledge Sharing Platform QA for</p>
+    <img src="assets/images/logo.png" alt="Asia Pacific University">
+  </div>
+</header>
+
+<div class="container" infinite-scroll='nextPage()' infinite-scroll-disabled='busy || noMoreData'>
+  <br/>
+  <div style="text-align: center">
+    <a type="button" class="btn btn-primary" href="/questions/create">Ask Question</a>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="20">Stars</th>
+        <th width="20">Answers</th>
+        <th>Question</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="question in questions">
+        <td style="text-align: center; vertical-align:middle">
+          <div style="font-size: xx-large;">{{question.stars.length}}</div>
+        </td>
+        <td style="text-align: center; vertical-align:middle">
+          <div ng-if="!isSelected(question)" style="font-size: xx-large;">{{question.answers.length}}</div>
+          <div ng-if="isSelected(question)" data-toggle="tooltip" 
+          tooltip="one of the answers was accepted as the correct answer"
+          tooltip-placement="right" style="font-size: xx-large; color:#5eba7d;">{{question.answers.length}}</div>
+        </td>
+        <td>
+          <div style="float: right;">
+            <span ng-if=" isStar(question)" class="glyphicon glyphicon-star" style="color: #CF7C00;" ></span>
+            <span ng-if="!isStar(question)" class="glyphicon glyphicon-star-empty"></span>
+          </div>
+          <a ng-href="/questions/show/{{question._id}}" style="font-size: large">{{question.title}}</a>
+          <div class="clearfix"></div>
+          <div style="float: right;">
+            by <a ng-href="/users/{{question.user._id}}">{{question.user.name}}</a>
+             - {{question.createdAt|fromNow}}
+          </div>
+          <div>
+            <span ng-repeat="tag in question.tags">
+              <span class="label label-info">
+                {{tag.text}}
+              </span>
+              &nbsp;
+            </span>
+          </div>
+          <div class="clearfix"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div ng-show='busy'>Loading data...</div>
+</div>
